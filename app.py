@@ -1,6 +1,6 @@
 import os
 import time
-import re
+import requests
 import json
 from slackclient import SlackClient
 from flask import Flask, request, make_response, Response
@@ -35,10 +35,13 @@ def hello_world():
 @app.route('/phrasing', methods=["POST", "GET"])
 def phrasing():
     print(request.form)
+    r = requests.get(
+        f'https://api.giphy.com/v1/gifs/random?api_key={os.environ["GIPHY_BOT_TOKEN"]}&tag=Phrasing&rating=R')
+    phrasing_gif= json.loads(r.content)
     message = slack_client.api_call(
         "chat.postMessage",
         channel=request.form['channel_id'],
-        text="<https://media.tenor.com/images/67ecccbfed3037cb59dc92e3a8acccd3/tenor.gif|Phrasing>"
+        text=f"<{phrasing_gif['data']['embed_url']}|Phrasing>"
     )
     print(message)
     return make_response("", 200)
