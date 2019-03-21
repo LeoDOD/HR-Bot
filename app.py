@@ -36,12 +36,12 @@ def hello_world():
 def phrasing():
     print(request.form)
     r = requests.get(
-        f'https://api.giphy.com/v1/gifs/random?api_key={os.environ["GIPHY_BOT_TOKEN"]}&tag=Phrasing&rating=PG-13')
+        f'https://api.giphy.com/v1/gifs/random?api_key={os.environ["GIPHY_BOT_TOKEN"]}&tag=Archer-Phrasing&rating=G')
     phrasing_gif= json.loads(r.content)
     message = slack_client.api_call(
         "chat.postMessage",
         channel=request.form['channel_id'],
-        text=f"<{phrasing_gif['data']['embed_url']}|Phrasing>"
+        text=f"<{phrasing_gif['data']['url']}|Phrasing>"
     )
     print(message)
     return make_response("", 200)
