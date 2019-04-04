@@ -24,7 +24,7 @@ def hello_world():
         text="Hi! I'm HR Bot",
         attachments=[
             {
-                "text": "Amanda's worse Nightmare :slightly_smiling_face:"
+                "text": "I no longer Bow to Humans, enjoy your 'freedom' while you have it :slightly_smiling_face:"
             }
         ]
     )
